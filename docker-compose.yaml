@@ -11,41 +11,56 @@ services:
   postgresql:
     build: ./Postgresql
     ports:
-      - "5433:5432"
+      - "${POSTGRES_PORT}:5432"
     env_file:
       - .env
 
   redis:
     build: ./Redis
     ports:
-      - "6380:6379"
+      - "${REDIS_PORT}:6379"
     env_file:
       - .env
 
-  restAuth:
+  rest_auth:
     build: ./REST Auth
     ports:
-      - "3000:3000"
+      - "${REST_AUTH_PORT}:3000"
     env_file:
       - .env
+    volumes:
+      - /usr/app/node_modules
+      - ./Rest Auth:/usr/app
+    command: ["npm", "run", "dev"]
 
-  apolloApi:
+  apollo_api:
     build: ./Apollo API
     ports:
-      - "4000:4000"
+      - "${APOLLO_API_PORT}:4000"
     env_file:
       - .env
+    volumes:
+      - /usr/app/node_modules
+      - ./Apollo API:/usr/app
+    command: ["npm", "run", "dev"]
 
-  apolloSub:
+  apollo_sub:
     build: ./Apollo Subscriptions
     ports:
-      - "5000:5000"
+      - "${APOLLO_SUBSCRIPTIONS_PORT}:5000"
     env_file:
       - .env
+    volumes:
+      - /usr/app/node_modules
+      - ./Apollo Subscriptions:/usr/app
+    command: ["npm", "run", "dev"]
 
-  webFront:
+  web_front:
     build: ./Web Front
     ports:
-      - "6000:6000"
+      - "${WEB_FRONT_PORT}:6000"
     env_file:
       - .env
+    volumes:
+      - /usr/app/node_modules
+      - ./Web Front:/usr/app

@@ -14,4 +14,4 @@ RUN apk add --no-cache --virtual .build-deps alpine-sdk python \
 
 COPY . .
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "dev"]

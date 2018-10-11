@@ -14,4 +14,4 @@ RUN apk add --no-cache --virtual .build-deps alpine-sdk python \
 
 COPY . .
 
-CMD ["nodemon", "server.js"] 
+CMD ["npm", "run", "start"]
