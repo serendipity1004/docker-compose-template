@@ -1,0 +1,51 @@
+# PORTS
+# REST API - 3000 - 3999
+# Apollo API - 4000 - 4999
+# Apollo Subscription - 5000 - 5999
+# Frontends - 6000 - 6999
+# postgresql - 5433
+# redis - 6380
+
+version: '3'
+services:
+  postgresql:
+    build: ./Postgresql
+    ports:
+      - "5433:5432"
+    env_file:
+      - .env
+
+  redis:
+    build: ./Redis
+    ports:
+      - "6380:6379"
+    env_file:
+      - .env
+
+  restAuth:
+    build: ./REST Auth
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+
+  apolloApi:
+    build: ./Apollo API
+    ports:
+      - "4000:4000"
+    env_file:
+      - .env
+
+  apolloSub:
+    build: ./Apollo Subscriptions
+    ports:
+      - "5000:5000"
+    env_file:
+      - .env
+
+  webFront:
+    build: ./Web Front
+    ports:
+      - "6000:6000"
+    env_file:
+      - .env
