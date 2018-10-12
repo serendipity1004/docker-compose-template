@@ -3,11 +3,19 @@
 # Apollo API - 4000 - 4999
 # Apollo Subscription - 5000 - 5999
 # Frontends - 6000 - 6999
+# nginx - 8000 - 8999
 # postgresql - 5433
 # redis - 6380
 
 version: '3'
 services:
+  nginx:
+    restart: always
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./Nginx
+    ports:
+      - '8000:80'
   postgresql:
     build: ./Postgresql
     ports:
@@ -23,7 +31,9 @@ services:
       - .env
 
   rest_auth:
-    build: ./REST Auth
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./REST Auth
     ports:
       - "${REST_AUTH_PORT}:3000"
     env_file:
@@ -34,7 +44,9 @@ services:
     command: ["npm", "run", "dev"]
 
   apollo_api:
-    build: ./Apollo API
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./Apollo API
     ports:
       - "${APOLLO_API_PORT}:4000"
     env_file:
@@ -45,7 +57,9 @@ services:
     command: ["npm", "run", "dev"]
 
   apollo_sub:
-    build: ./Apollo Subscriptions
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./Apollo Subscriptions
     ports:
       - "${APOLLO_SUBSCRIPTIONS_PORT}:5000"
     env_file:
@@ -56,7 +70,9 @@ services:
     command: ["npm", "run", "dev"]
 
   web_front:
-    build: ./Web Front
+    build:
+      dockerfile: Dockerfile.dev
+      context: ./Web Front
     ports:
       - "${WEB_FRONT_PORT}:6000"
     env_file:
@@ -64,3 +80,4 @@ services:
     volumes:
       - /usr/app/node_modules
       - ./Web Front:/usr/app
+    command: ["npm", "run", "start"]

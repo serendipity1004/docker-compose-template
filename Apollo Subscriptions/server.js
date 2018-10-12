@@ -8,6 +8,6 @@ const server = new ApolloServer({
     resolvers: resolver
 });
 
-server.listen().then(({url}) => {
+server.listen(process.env.APOLLO_SUBSCRIPTIONS_PORT).then(({url}) => {
     console.log(`Server ready at ${url}`);
 });
